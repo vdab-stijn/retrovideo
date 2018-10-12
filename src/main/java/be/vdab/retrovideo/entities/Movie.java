@@ -64,4 +64,8 @@ public class Movie extends RetroVideoEntity {
 	public final BigDecimal getPrice() {
 		return price;
 	}
+	
+	public final boolean canBeReserved() {
+		return getStock() > getReservations();
+	}
 }

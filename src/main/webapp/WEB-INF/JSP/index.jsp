@@ -7,14 +7,14 @@
 <html>
 	<vdab:htmlhead title='RetroVideo' />
 <body>
-	<vdab:menu title='Reserveren' />
+	<vdab:menu title='RetroVideo reservatie-systeem' />
 	<c:if test='${not empty movies}'>
 		<div class="movies">
 		<c:forEach var='movie' items='${movies}'>
 			<spring:url var='url' value='/movie/{id}'>
 				<spring:param name='id' value='${movie.id}' />
 			</spring:url>
-			<spring:url var='movieImage' value='/movies/${id}.jpg' />
+			<spring:url var='movieImage' value='/${id}.jpg' />
 			<img src='${movieImage}' title='${movie.titel}' />
 		</c:forEach>
 		</div>

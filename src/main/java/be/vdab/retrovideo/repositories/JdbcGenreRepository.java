@@ -30,7 +30,7 @@ public class JdbcGenreRepository implements GenreRepository {
 	 * 
 	 */
 	private static final String QUERY_SELECT_GENRE
-	= "SELECT id, name FROM genres WHERE id = ?";
+	= "SELECT id, naam FROM genres WHERE id = ?";
 	@Override
 	public Optional<Genre> read(long id) {
 		try {

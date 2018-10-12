@@ -2,14 +2,52 @@
 
 /*******************************************************************************
 **
-**		MENU SETTINGS
+**		MENU SETTINGS: SITE NAVIGATION
 **
 *******************************************************************************/
 #menu {
 	background-color: #4488ee;
 }
 
+#menu, #menu .nav, #menu h1, #menu .genres {
+	clear: both;
+}
+
+#menu .nav {
+	padding-left: 1.4em;
+	padding-top: 1.4em;
+}
+
+#menu h1 {
+	padding-left: 1.4em;
+}
+
+#menu .nav a {
+	padding: 0.4em;
+	margin-right: 0.3em;
+	
+	color: #000;
+	background-color: white;
+	border-radius: 25px;
+	border: 2px solid white;
+	
+	text-decoration: none;
+}
+
+#menu .nav a.current {
+	color: white;
+	background-color: #24DA37;
+	border-color: #24DA37;
+}
+
+/*******************************************************************************
+**
+**		MENU SETTINGS: GENRES
+**
+*******************************************************************************/
 ul.genres {
+	margin: 0;
+	
 	list-style-type: none;
 	
 	overflow: hidden;
@@ -21,13 +59,45 @@ ul.genres li {
 
 ul.genres li a {
 	display: block;
+	padding: 14px 16px;
+	
 	color: white;
 	font-weight: bold;
 	text-align: center;
-	padding: 14px 16px;
 	text-decoration: none;
 }
 
 ul.genres li a:hover {
-	background-color: #111;
+	background-color: #000;
+}
+
+ul.genres li a.current {
+	background-color: #000;
+}
+
+/*******************************************************************************
+**
+**		SPECIAL CONTAINERS: MOVIES
+**
+*******************************************************************************/
+div.movies {
+	
+}
+
+div.movie {
+	float: left;
+	
+	margin: 10px;
+}
+
+div.movie div.title {
+	font-size: 2em;
+	font-weight: bold;
+	color: #4488ee;
+	
+	text-align: center;
+}
+
+div.movie div.poster {
+	
 }

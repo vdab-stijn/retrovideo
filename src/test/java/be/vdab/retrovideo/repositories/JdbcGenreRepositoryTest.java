@@ -31,6 +31,11 @@ extends AbstractTransactionalJUnit4SpringContextTests {
 	private JdbcGenreRepository repository;
 	
 	@Test
+	public void readKnownGenre() {
+		assertTrue(repository.read(1).isPresent());
+	}
+	
+	@Test
 	public void readUnknownGenre() {
 		assertFalse(repository.read(-1).isPresent());
 	}
