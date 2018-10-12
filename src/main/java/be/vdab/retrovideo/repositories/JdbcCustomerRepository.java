@@ -35,7 +35,10 @@ public class JdbcCustomerRepository implements CustomerRepository {
 			"FROM klanten WHERE familienaam LIKE ?";
 	@Override
 	public List<Customer> findAllBySearchString(String searchString) {
-		return template.query(QUERY_SELECT_BY_SEARCH_STRING, customerMapper);
+		return template.query(
+				QUERY_SELECT_BY_SEARCH_STRING,
+				new String[] { "%" + searchString + "%" },
+				customerMapper);
 	}
 
 }

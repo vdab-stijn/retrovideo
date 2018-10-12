@@ -7,6 +7,8 @@ import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace;
@@ -23,6 +25,9 @@ import be.vdab.retrovideo.entities.Customer;
 @Import(JdbcCustomerRepository.class)
 public class JdbcCustomerRepositoryTest
 extends AbstractTransactionalJUnit4SpringContextTests {
+	
+	private static final Logger LOGGER
+	= LoggerFactory.getLogger(JdbcCustomerRepositoryTest.class);
 
 	private static final String CUSTOMERS = "klanten";
 	
@@ -47,7 +52,9 @@ extends AbstractTransactionalJUnit4SpringContextTests {
 		final List<Customer> customers
 		= repository.findAllBySearchString(SEARCH_STRING);
 		
+		LOGGER.debug("Found " + customers.size() + " customer record(s)");
+		
 		assertEquals(customers.size(), super.countRowsInTableWhere(
-				CUSTOMERS, "familienaam LIKE %" + SEARCH_STRING + "%"));
+				CUSTOMERS, "familienaam LIKE '%" + SEARCH_STRING + "%'"));
 	}
 }
