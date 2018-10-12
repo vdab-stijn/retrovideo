@@ -1,0 +1,33 @@
+@charset "UTF-8";
+
+/*******************************************************************************
+**
+**		MENU SETTINGS
+**
+*******************************************************************************/
+#menu {
+	background-color: #4488ee;
+}
+
+ul.genres {
+	list-style-type: none;
+	
+	overflow: hidden;
+}
+
+ul.genres li {
+	float: left;
+}
+
+ul.genres li a {
+	display: block;
+	color: white;
+	font-weight: bold;
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none;
+}
+
+ul.genres li a:hover {
+	background-color: #111;
+}

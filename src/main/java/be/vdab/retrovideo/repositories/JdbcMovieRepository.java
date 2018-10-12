@@ -32,7 +32,7 @@ public class JdbcMovieRepository implements MovieRepository {
 		this.template = template;
 	}
 	
-	private static final String SELECT_MOVIE
+	private static final String QUERY_SELECT_MOVIE
 	= "SELECT m.id AS id, " +
 			"g.id AS genreId, g.naam AS genreName, " +
 			"m.titel AS titel, m.voorraad AS voorraad, " +
@@ -44,11 +44,23 @@ public class JdbcMovieRepository implements MovieRepository {
 	public Optional<Movie> read(final long id) {
 		try {
 			return Optional.of(
-					template.queryForObject(SELECT_MOVIE, movieMapper, id));
+					template.queryForObject(
+							QUERY_SELECT_MOVIE, movieMapper, id));
 		}
 		catch (final DataAccessException dae) {
 			return Optional.empty();
 		}
+	}private static final String QUERY_SELECT_MOVIES_ALL
+	= "SELECT m.id AS id, " +
+			"g.id AS genreId, g.naam AS genreName, " +
+			"m.titel AS titel, m.voorraad AS voorraad, " +
+			"m.gereserveerd AS gereserveerd, m.prijs AS prijs " +
+			"FROM films AS m " +
+			"JOIN genres AS g ON m.genreid = g.id " +
+			"ORDER BY titel";
+	@Override
+	public List<Movie> findAll() {
+		return template.query(QUERY_SELECT_MOVIES_ALL, movieMapper);
 	}
 
 //	private static final String SELECT_MOVIE_BY_GENRE
@@ -64,7 +76,7 @@ public class JdbcMovieRepository implements MovieRepository {
 //	public List<Movie> findAllByGenre(final String genre) {
 //		return template.query(SELECT_MOVIE_BY_GENRE, movieMapper, genre);
 //	}
-	private static final String SELECT_MOVIE_BY_GENRE
+	private static final String QUERY_SELECT_MOVIE_BY_GENRE
 	= "SELECT m.id AS id, " +
 			"g.id AS genreId, g.naam AS genreName, " +
 			"m.titel AS titel, m.voorraad AS voorraad, " +
@@ -75,7 +87,8 @@ public class JdbcMovieRepository implements MovieRepository {
 			"ORDER BY titel";
 	@Override
 	public List<Movie> findAllByGenre(final long genreId) {
-		return template.query(SELECT_MOVIE_BY_GENRE, movieMapper, genreId);
+		return template.query(
+				QUERY_SELECT_MOVIE_BY_GENRE, movieMapper, genreId);
 	}
 
 	@Override

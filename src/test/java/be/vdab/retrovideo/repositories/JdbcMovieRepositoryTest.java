@@ -63,6 +63,16 @@ extends AbstractTransactionalJUnit4SpringContextTests {
 	}
 	
 	@Test
+	public final void findAllWorks() {
+		final List<Movie> movies = repository.findAll();
+		
+		// Movies are found
+		assertTrue(movies.size() > 0);
+		// Number of movies found is as expected
+		assertEquals(movies.size(), super.countRowsInTable(MOVIES));
+	}
+	
+	@Test
 	public final void findAllByGenreWorks() {
 		final long genreId = getIdOfKnownGenre();
 		final List<Movie> movies = repository.findAllByGenre(genreId);
