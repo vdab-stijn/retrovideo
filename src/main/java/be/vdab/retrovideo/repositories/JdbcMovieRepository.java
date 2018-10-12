@@ -1,5 +1,6 @@
 package be.vdab.retrovideo.repositories;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -10,7 +11,6 @@ import org.springframework.stereotype.Repository;
 
 import be.vdab.retrovideo.entities.Genre;
 import be.vdab.retrovideo.entities.Movie;
-import be.vdab.retrovideo.entities.Reservation;
 
 @Repository
 public class JdbcMovieRepository implements MovieRepository {
@@ -63,19 +63,6 @@ public class JdbcMovieRepository implements MovieRepository {
 		return template.query(QUERY_SELECT_MOVIES_ALL, movieMapper);
 	}
 
-//	private static final String SELECT_MOVIE_BY_GENRE
-//	= "SELECT m.id AS id, " +
-//			"g.id AS genreId, g.naam AS genreName, " +
-//			"m.titel AS titel, m.voorraad AS voorraad, " +
-//			"m.gereserveerd AS gereserveerd, m.prijs AS prijs " +
-//			"FROM films AS m " +
-//			"JOIN genres AS g ON m.genreid = g.id " +
-//			"WHERE g.naam = ? " +
-//			"ORDER BY titel";
-//	@Override
-//	public List<Movie> findAllByGenre(final String genre) {
-//		return template.query(SELECT_MOVIE_BY_GENRE, movieMapper, genre);
-//	}
 	private static final String QUERY_SELECT_MOVIE_BY_GENRE
 	= "SELECT m.id AS id, " +
 			"g.id AS genreId, g.naam AS genreName, " +
@@ -90,11 +77,15 @@ public class JdbcMovieRepository implements MovieRepository {
 		return template.query(
 				QUERY_SELECT_MOVIE_BY_GENRE, movieMapper, genreId);
 	}
-
+	
+	private static final String QUERY_PRICE
+	= "SELECT prijs AS price FROM films WHERE id = ?";
 	@Override
-	public void addReservation(Reservation reservation) {
-		// TODO Auto-generated method stub
-
+	public final BigDecimal countTotal(final List<Long> movieIds) {
+		long total = 0L;
+		for (final long movieId : movieIds)
+			total += template.queryForObject(QUERY_PRICE, Long.class, movieId);
+		
+		return BigDecimal.valueOf(total);
 	}
-
 }

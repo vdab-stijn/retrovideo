@@ -10,9 +10,11 @@
 	<div class="error">
 	<div>
 		<h2>Problem description</h2>
-		<p>
-			An error occurred while processing your request.
-		</p>
+		<p>An error occurred while processing your request.</p>
+		<p>We apologise for the inconvenience. Please try again later.</p>
+	</div>
+	<div>
+		<h2>Error output</h2>
 		<c:if test='${not empty cause}'>
 			<p>
 				${cause.toString}
@@ -35,9 +37,6 @@
 				</c:forEach>
 			</p>
 		</c:if>
-		<p>
-			We apologise for the inconvenience. Please try again later.
-		</p>
 	</div>
 	<div>
 		<h2>What to do</h2>

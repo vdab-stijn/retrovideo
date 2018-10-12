@@ -3,52 +3,44 @@ package be.vdab.retrovideo.web;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import be.vdab.retrovideo.repositories.GenreRepository;
-import be.vdab.retrovideo.repositories.MovieRepository;
+import be.vdab.retrovideo.services.GenreService;
+import be.vdab.retrovideo.services.MovieService;
 
 @Controller
-@RequestMapping("/movies")
+@RequestMapping("/movie")
 public class MovieController {
 
-	private final GenreRepository genreRepository;
-	private final MovieRepository movieRepository;
+	private final GenreService genreService;
+	private final MovieService movieService;
 	
 	public MovieController(
-			final GenreRepository genreRepository,
-			final MovieRepository movieRepository) {
-		this.genreRepository = genreRepository;
-		this.movieRepository = movieRepository;
+			final GenreService genreService,
+			final MovieService movieService) {
+		this.genreService = genreService;
+		this.movieService = movieService;
 	}
 	
-	private static final String VIEW_MOVIES = "movies";
-	@GetMapping
-	public final ModelAndView movies() {
-		return new ModelAndView(VIEW_MOVIES)
-				.addObject("genres", genreRepository.findAll())
-				.addObject("movies", movieRepository.findAll());
-	}
-		
-	private static final String VIEW_MOVIES_BY_GENRES = "movies";
+	private static final String VIEW_MOVIE = "movie";
 	@GetMapping("{id}")
-	public final ModelAndView moviesByGenre(@PathVariable final long id) {
-		final ModelAndView modelAndView
-		= new ModelAndView(VIEW_MOVIES_BY_GENRES)
-				.addObject("genres", genreRepository.findAll())
-				.addObject("currentGenre", id)
-				.addObject("movies", movieRepository.findAllByGenre(id));
+	public final ModelAndView movie(@PathVariable final long id) {
+		final ModelAndView modelAndView = new ModelAndView(VIEW_MOVIE);
 		
-		genreRepository.read(id).ifPresent(genre ->
-				modelAndView.addObject("genre", genre));
+		modelAndView.addObject("genres", genreService.findAll());
+		
+		movieService.read(id).ifPresent(movie -> 
+			modelAndView.addObject("movie", movie));
 		
 		return modelAndView;
 	}
 	
-	private static final String VIEW_MOVIE = "movie";
-	@GetMapping("/movie/{id}")
-	public final ModelAndView movie(final Long movieId) {
-		return new ModelAndView(VIEW_MOVIE);
+	private static final String REDIRECT_AFTER_ADD = "redirect:/";
+	@PostMapping
+	public final String addMovieToBasket() {
+		
+		return REDIRECT_AFTER_ADD;
 	}
 }

@@ -7,17 +7,30 @@
 <html>
 	<vdab:htmlhead title='RetroVideo' />
 <body>
-	<vdab:menu title='RetroVideo reservatie-systeem' />
+	<vdab:menu title='RetroVideo reservatie-systeem' currentPage='' currentGenre='${currentGenre}' />
+	
 	<c:if test='${not empty movies}'>
-		<div class="movies">
+	<div>
+		<c:if test='${not empty genre}'>
+			<h1>${genre.name.toUpperCase()}</h1>
+		</c:if>
 		<c:forEach var='movie' items='${movies}'>
-			<spring:url var='url' value='/movie/{id}'>
+			<spring:url var='imageURL' value='/posters/{id}.jpg'>
 				<spring:param name='id' value='${movie.id}' />
 			</spring:url>
-			<spring:url var='movieImage' value='/${id}.jpg' />
-			<img src='${movieImage}' title='${movie.titel}' />
-		</c:forEach>
+			<spring:url var='movieURL' value='/movie/{id}'>
+				<spring:param name='id' value='${movie.id}' />
+			</spring:url>
+		<div class="movie">
+			<!-- <div class="title">${movie.title}</div> -->
+			<div class="poster">
+				<a href='${movieURL}'>
+				<img src='${imageURL}' title='${movie.title} (RESERVATIE <c:if test='${not movie.canBeReserved()}'>NIET </c:if>MOGELIJK)' />
+				</a>
+			</div>
 		</div>
+		</c:forEach>
+	</div>
 	</c:if>
 </body>
 </html>

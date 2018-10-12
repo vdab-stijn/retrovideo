@@ -7,10 +7,10 @@
 <c:if test='${not empty genres}'>
 	<ul class='genres'>
 	<c:forEach var='genre' items='${genres}'>
-		<spring:url var='url' value='/movies/{id}'>
+		<spring:url var='url' value='/{id}'>
 			<spring:param name='id' value='${genre.id}' />
 		</spring:url>
-		<li><a href='${url}' title='${genre.name}'<c:if test='${not empty currentGenre and currentGenre == genre.id}'> class="current"</c:if>>${genre.name}</a></li>
+		<li><a href='${url}' title='${genre.name}'<c:if test='${not empty currentGenre and currentGenre == genre.id}'> class="current" disabled="true"</c:if>>${genre.name}</a></li>
 	</c:forEach>
 	</ul>
 </c:if>

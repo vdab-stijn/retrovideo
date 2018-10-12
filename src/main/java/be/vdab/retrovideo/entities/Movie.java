@@ -65,7 +65,11 @@ public class Movie extends RetroVideoEntity {
 		return price;
 	}
 	
+	public final long getAvailable() {
+		return getStock() - getReservations();
+	}
+	
 	public final boolean canBeReserved() {
-		return getStock() > getReservations();
+		return getAvailable() > 0;
 	}
 }

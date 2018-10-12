@@ -18,19 +18,11 @@
 			<spring:url var='url' value='/posters/{id}.jpg'>
 				<spring:param name='id' value='${movie.id}' />
 			</spring:url>
-		<div class="movie">
-			<!-- <div class="title">${movie.title}</div> -->
-			<div class="poster">
-				<c:choose>
-				<c:when test='${movie.canBeReserved()}'>
-					<img src='${url}' title='${movie.title} (RESERVATIE MOGELIJK)' />
-				</c:when>
-				<c:otherwise>
-					<img src='${url}' title='${movie.title} (RESERVATIE NIET MOGELIJK)' />
-				</c:otherwise>
-				</c:choose>
+			<div class="movie">
+				<div class="poster">
+					<img src='${url}' title='${movie.title}' />
+				</div>
 			</div>
-		</div>
 		</c:forEach>
 	</div>
 	</c:if>
