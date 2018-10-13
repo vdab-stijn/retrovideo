@@ -22,27 +22,27 @@ public class MovieServiceDefault implements MovieService {
 	}
 	
 	@Override
-	public final Optional<Movie> read(final long movieId) {
+	public Optional<Movie> read(final long movieId) {
 		return movieRepository.read(movieId);
 	}
 
 	@Override
-	public final List<Movie> findAll() {
+	public List<Movie> findAll() {
 		return movieRepository.findAll();
 	}
 	
 	@Override
-	public final List<Movie> findAllByGenreId(final long genreId) {
+	public List<Movie> findAllByGenreId(final long genreId) {
 		return movieRepository.findAllByGenreId(genreId);
 	}
 
 	@Override
-	public final BigDecimal countTotal(final List<Long> movieIds) {
+	public BigDecimal countTotal(final List<Long> movieIds) {
 		return movieRepository.countTotal(movieIds);
 	}
 
 	@Override
-	public final List<Movie> findAllBySearchString(final String searchString) {
+	public List<Movie> findAllBySearchString(final String searchString) {
 		return movieRepository.findAllBySearchString(searchString);
 	}
 }

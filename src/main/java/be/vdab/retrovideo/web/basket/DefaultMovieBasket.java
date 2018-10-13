@@ -18,21 +18,20 @@ public class DefaultMovieBasket implements Serializable, MovieBasket {
 	
 	public DefaultMovieBasket() {
 		movieIds = new ArrayList<>();
-		System.err.println("OK");System.exit(1);
 	}
 
 	@Override
-	public final void addMovieId(final long movieId) {
+	public void addMovieId(final long movieId) {
 		movieIds.add(movieId);
 	}
 	
 	@Override
-	public final void deleteMovieId(final long movieId) {
+	public void deleteMovieId(final long movieId) {
 		movieIds.remove(movieId);
 	}
 
 	@Override
-	public final List<Long> getMovieIds() {
+	public List<Long> getMovieIds() {
 		return movieIds;
 	}
 }

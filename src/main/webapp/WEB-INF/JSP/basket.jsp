@@ -5,31 +5,52 @@
 
 <!DOCTYPE html>
 <html>
-	<vdab:htmlhead title='Basket' />
+	<vdab:htmlhead title='RetroVideo - Basket' />
 <body>
 	<vdab:menu title='Movies in basket' currentPage='basket' />
 	
+	<div class='content'>
 	<c:url var='url' value='/basket' />
-	<form:form id='basketForm' action='${url}' method='post'>
-		<table class="basket">
-			<tr>
-				<th>Movie</th>
-				<th>Price</th>
-				<th></th>
+	<form:form id='basketForm' modelAttribute='movieBasketform' action='${url}' method='post'>
+		<table class='basket'>
+			<tr class='basketHeader'>
+				<th class='movieTitle'>MOVIE</th>
+				<th class='moviePrice'>PRICE</th>
+				<th class='movieAction'>
+					<input type='submit' value='Remove' id='' />
+				</th>
 			</tr>
+			<c:choose>
+			<c:when test='${not empty movies}'>
 			<c:forEach var='movie' items='${movies}'>
-				<tr>
-					<td>${movie.title}</td>
-					<td>${movie.price}</td>
-					<td></td>
+				<tr class='basketData'>
+					<td class='movieTitle'>${movie.title}</td>
+					<td class='moviePrice'>${movie.price}</td>
+					<td class='movieAction'>
+						<form:checkbox path='movieId' value='${movie.id}' />
+					</td>
 				</tr>
 			</c:forEach>
-			<tr>
-				<td>TOTAL:</td>
-				<td><c:out value='${total}' /> &euro;</td>
-				<td>&nbsp;</td>
+			</c:when>
+			<c:otherwise>
+				<c:url var='url' value='/' />
+				<tr class='basketData'>
+					<td class='movieTitle' colspan='3'>
+						The basket is empty.
+						Please <a href='${url}'>select</a> some movies.
+					</td>
+				</tr>
+			</c:otherwise>
+			</c:choose>
+			<tr class='basketFooter'>
+				<td class='movieTitle'>TOTAL:</td>
+				<td class='moviePrice' colspan='2'><c:out value='${total}' /> &euro;</td>
 			</tr>
 		</table>
 	</form:form>
+	<script>
+		document.getElementById('basketForm').
+	</script>
+	</div>
 </body>
 </html>

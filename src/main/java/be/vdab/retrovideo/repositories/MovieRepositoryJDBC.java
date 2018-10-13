@@ -46,7 +46,7 @@ public class MovieRepositoryJDBC implements MovieRepository {
 			"JOIN genres AS g ON m.genreid = g.id " +
 			"WHERE m.id = ?";
 	@Override
-	public final Optional<Movie> read(final long id) {
+	public Optional<Movie> read(final long id) {
 		try {
 			return Optional.of(
 					template.queryForObject(
@@ -66,7 +66,7 @@ public class MovieRepositoryJDBC implements MovieRepository {
 			"JOIN genres AS g ON m.genreid = g.id " +
 			"ORDER BY titel";
 	@Override
-	public final List<Movie> findAll() {
+	public List<Movie> findAll() {
 		LOGGER.debug(template.toString());
 		LOGGER.debug(movieMapper.toString());
 		return template.query(QUERY_SELECT_MOVIES_ALL, movieMapper);
@@ -82,7 +82,7 @@ public class MovieRepositoryJDBC implements MovieRepository {
 			"WHERE g.id = ? " +
 			"ORDER BY titel";
 	@Override
-	public final List<Movie> findAllByGenreId(final long genreId) {
+	public List<Movie> findAllByGenreId(final long genreId) {
 		return template.query(
 				QUERY_SELECT_MOVIE_BY_GENRE, movieMapper, genreId);
 	}
@@ -94,19 +94,20 @@ public class MovieRepositoryJDBC implements MovieRepository {
 			"m.gereserveerd AS gereserveerd, m.prijs AS prijs " +
 			"FROM films AS m " +
 			"JOIN genres AS g ON m.genreid = g.id " +
-			"WHERE titel LIKE ? " +
+			"WHERE LOWER(titel) LIKE ? " +
 			"ORDER BY titel";
 	@Override
 	public List<Movie> findAllBySearchString(String searchString) {
 		return template.query(
 				QUERY_SELECT_MOVIE_BY_SEARCH_STRING.replaceFirst(
-						"\\?", "'%" + searchString + "%'"), movieMapper);
+						"\\?", "'%" + searchString.toLowerCase() + "%'"),
+				movieMapper);
 	}
 	
 	private static final String QUERY_PRICE
-	= "SELECT prijs FROM films WHERE id IN ";
+	= "SELECT SUM(prijs) FROM films WHERE id IN ";
 	@Override
-	public final BigDecimal countTotal(final List<Long> movieIds) {
+	public BigDecimal countTotal(final List<Long> movieIds) {
 		BigDecimal total = BigDecimal.ZERO;
 		
 		if (movieIds == null) return total;
@@ -119,7 +120,7 @@ public class MovieRepositoryJDBC implements MovieRepository {
 		for (int i = 0; i < size; i++) {
 			query += movieIds.get(i);
 			
-			if (i < size - 2) query += ",";
+			if (i < size - 1) query += ",";
 		}
 		query += ")";
 		

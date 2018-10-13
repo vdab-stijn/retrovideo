@@ -1,6 +1,7 @@
 package be.vdab.retrovideo.repositories;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -24,6 +25,17 @@ public class CustomerRepositoryJDBC implements CustomerRepository {
 	
 	public CustomerRepositoryJDBC(final JdbcTemplate template) {
 		this.template = template;
+	}
+	
+	/*
+	 * READ A SPECIFIC CUSTOMER
+	 */
+	private static final String QUERY_SELECT_BY_ID
+	= "SELECT id, voornaam, familienaam, straatNummer, postcode, gemeente " +
+			"FROM klanten WHERE id = ?";
+	public Optional<Customer> read(final long customerId) {
+		return Optional.of(template.queryForObject(
+				QUERY_SELECT_BY_ID, customerMapper, customerId));
 	}
 	
 	/*

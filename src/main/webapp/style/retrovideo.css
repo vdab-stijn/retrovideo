@@ -115,6 +115,15 @@ div.genres ul li a.current, div.genres ul li span.current {
 
 /*******************************************************************************
 **
+**		GENERAL PURPOSE CLASSES
+**
+*******************************************************************************/
+.row {
+	clear: both;
+}
+
+/*******************************************************************************
+**
 **		SPECIAL CONTAINERS: MOVIES
 **
 *******************************************************************************/
@@ -126,6 +135,8 @@ div.movie {
 	float: left;
 	
 	margin: 10px;
+	width: 220px;
+	height: 340px;
 }
 
 div.movie div.title {
@@ -142,23 +153,66 @@ div.movie div.poster {
 
 /*******************************************************************************
 **
+**		SPECIAL CONTAINERS: MOVIE DATA
+**
+*******************************************************************************/
+.movie {
+	padding-left: 2em;
+}
+
+.movie img {
+	clear: both;
+}
+
+.movie img, .movie .row, .movie .row span {
+	margin-bottom: 1em;
+}
+
+.movie .row .rowLabel {
+	width: 250px;
+}
+
+.movie .row .rowData {
+	
+}
+
+/*******************************************************************************
+**
 **		SPECIAL CONTAINERS: BASKET TABLE
 **
 *******************************************************************************/
-table.basket {
-	width: 30em;
+.basket {
+	width: 40em;
+	
+	border-collapse: collapse;
 }
 
-table.basket th, table.basket td {
+.basket, .basket th, .basket td {
+	border: 1px solid black;
+	
 	text-align: left;
 }
 
-table.basket tr {
-	padding-bottom: 1em;
+.basket tr.basketHeader, .basket tr.basketFooter {
+	background-color: #6a7881;
+	
+	font-weight: bold;
 }
 
-table.basket th {
-	font-weight: bold;
+.basket tr.basketData:nth-child(even) {
+	background-color: #ccc;
+}
+
+.basket tr.basketData:hover {
+	background-color: #6a7881;
+}
+
+.basket th {
+	height: 2em;
+}
+
+.basket th, .basket th {
+	padding: 1.4em;
 }
 
 

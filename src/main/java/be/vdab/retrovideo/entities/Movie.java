@@ -1,8 +1,15 @@
 package be.vdab.retrovideo.entities;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
-public class Movie extends RetroVideoEntity {
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
+public class Movie extends RetroVideoEntity implements Serializable {
+
+	/* Implements Serializable. */
+	private static final long serialVersionUID = -2259179673057966066L;
 
 	private Genre genre;
 	private String title;

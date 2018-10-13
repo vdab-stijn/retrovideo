@@ -1,14 +1,17 @@
 package be.vdab.retrovideo.web.basket;
 
+import javax.validation.constraints.NotNull;
+
 public class MovieBasketForm {
 
-	private long movieId;
+	@NotNull.List(value = { @NotNull })
+	private Long[] movieId;
 	
-	public final void setMovieId(final long movieId) {
+	public final void setMovieId(final Long[] movieId) {
 		this.movieId = movieId;
 	}
 	
-	public final long getMovieId() {
+	public final Long[] getMovieId() {
 		return movieId;
 	}
 }

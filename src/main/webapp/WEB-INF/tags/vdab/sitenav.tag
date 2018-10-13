@@ -3,9 +3,9 @@
 <%@ taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core' %>
 <!-- // BEGIN (MENU: SITE NAVIGATION) ************************************** -->
 <div class='nav'>
-	<a href='/' title='homepage'<c:if test='${empty currentPage}'> class='current'</c:if>>RESERVATIES</a>
-	<a href='/basket' title='basket'<c:if test='${currentPage.equalsIgnoreCase("basket")}'> class='current'</c:if>>Basket</a>
-	<a href='/customers' title='customers'<c:if test='${currentPage.equalsIgnoreCase("customers")}'> class='current'</c:if>>Customers</a>
+	<a href='/' title='Return to the homepage'<c:if test='${empty currentPage}'> class='current'</c:if>>RESERVATIES</a>
+	<a href='/basket' title='View movies in the basket'<c:if test='${currentPage.equalsIgnoreCase("basket")}'> class='current'</c:if>>Basket</a>
+	<a href='/customers' title='View the customer listing'<c:if test='${currentPage.equalsIgnoreCase("customers")}'> class='current'</c:if>>Customers</a>
 	<a href='/movies' title='Movie database' class='<c:choose><c:when test='${currentPage.equalsIgnoreCase("movies")}'>current</c:when><c:otherwise>movieDB</c:otherwise></c:choose>'>Movie database</a>
 	<div class='search'>
 		<form action='' method='get'>

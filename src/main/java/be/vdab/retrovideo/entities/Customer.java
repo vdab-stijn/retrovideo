@@ -62,4 +62,8 @@ public class Customer extends RetroVideoEntity {
 	public final String getMunicipality() {
 		return municipality;
 	}
+	
+	public final String getName() {
+		return getFirstName() + " " + getLastName();
+	}
 }

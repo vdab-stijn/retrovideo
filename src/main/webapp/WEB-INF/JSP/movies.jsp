@@ -5,7 +5,7 @@
 
 <!DOCTYPE html>
 <html>
-	<vdab:htmlhead title='Movies' />
+	<vdab:htmlhead title='RetroVideo: Movie DB' />
 <body>
 	<vdab:menu title='Movie database' currentPage='movies' currentGenre='${currentGenre}' />
 	

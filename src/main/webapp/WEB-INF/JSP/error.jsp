@@ -4,7 +4,7 @@
 
 <!DOCTYPE html>
 <html>
-	<vdab:htmlhead title='RetroVideo' />
+	<vdab:htmlhead title='RetroVideo - ERROR' />
 <body>
 	<vdab:menu title='Hmmm ...' />
 	<div class="error">

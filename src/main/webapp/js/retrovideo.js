@@ -61,6 +61,10 @@ function processAjaxResponse() {
 		if (ajaxRequest.status == 200) {
 			console.log("AJAX: " + ajaxRequest.responseText);
 			
+			var movies = JSON.parse(ajaxRequest.response);
+			
+			console.log('MOVIES FOUND: ' + movies.length);
+			
 			eSearch.value = '';
 		}
 	}
