@@ -8,7 +8,10 @@
 	<title>${title}</title>
 	
 	<link rel='icon' href='<c:url value="/images/retrovideo.ico" />' type='image/x-icon' />
+	
 	<link rel='stylesheet' href='<c:url value="/style/reset.css" />' type='text/css' />
 	<link rel='stylesheet' href='<c:url value="/style/set.css" />' type='text/css' />
 	<link rel='stylesheet' href='<c:url value="/style/retrovideo.css" />' type='text/css' />
+	
+	<script type='text/javascript' src='js/retrovideo.js'></script>
 </head>

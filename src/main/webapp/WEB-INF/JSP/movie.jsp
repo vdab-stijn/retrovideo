@@ -24,10 +24,10 @@
 			<dt>Available</dt>
 			<dd>${movie.available}</dd>
 		</dl>
-		<c:url var='url' value='/movie' />
-		<form:form id='movieBasketForm' action='${url}' method='post'>
-			<form:input id='movieId' path='movie' type='hidden' value='${movie.id}' />
-			<form:input id='basketSubmit' path='submit' type='submit' value='Add to basket' />
+		<c:url var='url' value='/basket' />
+		<form:form id='movieBasketForm' action='${url}' method='get'>
+			<form:input id='movieId' path='movieId' type='hidden' value='${movie.id}' />
+			<input id='basketSubmit' type='submit' value='Add to basket' />
 		</form:form>
 		<script>
 			document.getElementById('movieBasketForm').onsubmit = function() {

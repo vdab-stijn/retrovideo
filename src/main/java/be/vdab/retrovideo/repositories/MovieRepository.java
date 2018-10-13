@@ -11,7 +11,8 @@ public interface MovieRepository {
 	Optional<Movie> read(final long id);
 	
 	List<Movie> findAll();
-	List<Movie> findAllByGenre(final long genreId);
+	List<Movie> findAllByGenreId(final long genreId);
+	List<Movie> findAllBySearchString(final String searchString);
 	
 	BigDecimal countTotal(final List<Long> movieIds);
 }

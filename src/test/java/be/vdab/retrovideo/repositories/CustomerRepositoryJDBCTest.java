@@ -20,8 +20,8 @@ import be.vdab.retrovideo.entities.Customer;
 @RunWith(SpringRunner.class)
 @JdbcTest
 @AutoConfigureTestDatabase(replace = Replace.NONE)
-@Import(JdbcCustomerRepository.class)
-public class JdbcCustomerRepositoryTest
+@Import(CustomerRepositoryJDBC.class)
+public class CustomerRepositoryJDBCTest
 extends AbstractTransactionalJUnit4SpringContextTests {
 
 	private static final String CUSTOMERS = "klanten";
@@ -29,7 +29,7 @@ extends AbstractTransactionalJUnit4SpringContextTests {
 	private static final String SEARCH_STRING = "man";
 	
 	@Autowired
-	private JdbcCustomerRepository repository;
+	private CustomerRepositoryJDBC repository;
 	
 	@Test
 	public void findAllBySearchStringReturnsAListOfCustomerObjects() {

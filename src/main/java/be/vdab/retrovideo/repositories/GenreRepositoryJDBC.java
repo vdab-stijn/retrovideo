@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 import be.vdab.retrovideo.entities.Genre;
 
 @Repository
-public class JdbcGenreRepository implements GenreRepository {
+public class GenreRepositoryJDBC implements GenreRepository {
 
 	private final JdbcTemplate template;
 	
@@ -20,7 +20,7 @@ public class JdbcGenreRepository implements GenreRepository {
 				resultSet.getLong("id"),
 				resultSet.getString("naam"));
 	
-	public JdbcGenreRepository(final JdbcTemplate template) {
+	public GenreRepositoryJDBC(final JdbcTemplate template) {
 		this.template = template;
 	}
 	

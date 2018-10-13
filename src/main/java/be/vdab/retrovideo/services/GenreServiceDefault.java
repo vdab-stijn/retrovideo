@@ -4,16 +4,19 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Transactional;
 
 import be.vdab.retrovideo.entities.Genre;
 import be.vdab.retrovideo.repositories.GenreRepository;
 
 @Service
-public class DefaultGenreService implements GenreService {
+@Transactional(readOnly = true, isolation = Isolation.READ_COMMITTED)
+public class GenreServiceDefault implements GenreService {
 
 	public final GenreRepository genreRepository;
 	
-	public DefaultGenreService(final GenreRepository genreRepository) {
+	public GenreServiceDefault(final GenreRepository genreRepository) {
 		this.genreRepository = genreRepository;
 	}
 	

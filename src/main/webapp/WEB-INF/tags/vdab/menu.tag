@@ -5,8 +5,14 @@
 <%@ taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core' %>
 <%@ taglib prefix='vdab' uri='http://vdab.be/tags' %>
 
+<!-- *********************************************************************** -->
+<!-- BEGIN (MENU)                                                            -->
+<!-- *********************************************************************** -->
 <div id='menu'>
-	<vdab:sitenav currentPage='${currentPage}' />
-	<h1>${title}</h1>
-	<vdab:genres currentGenre='${currentGenre}' />
+<vdab:sitenav currentPage='${currentPage}' />
+<div class='header1'>${title}</div>
+<vdab:genres currentGenre='${currentGenre}' />
 </div>
+<!-- *********************************************************************** -->
+<!-- END (MENU)                                                              -->
+<!-- *********************************************************************** -->

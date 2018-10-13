@@ -14,19 +14,25 @@ public class DefaultMovieBasket implements Serializable, MovieBasket {
 	/* Implements Serializable. */
 	private static final long serialVersionUID = -2259179673057966066L;
 	
-	private final List<Long> movieIds = new ArrayList<>();
+	private final List<Long> movieIds;
+	
+	public DefaultMovieBasket() {
+		movieIds = new ArrayList<>();
+		System.err.println("OK");System.exit(1);
+	}
 
 	@Override
-	public final void addReservation(long movieId) {
+	public final void addMovieId(final long movieId) {
 		movieIds.add(movieId);
 	}
 	
-	public final void removeReservation(final long movieId) {
-		
+	@Override
+	public final void deleteMovieId(final long movieId) {
+		movieIds.remove(movieId);
 	}
 
 	@Override
-	public final List<Long> getReservations() {
+	public final List<Long> getMovieIds() {
 		return movieIds;
 	}
 }

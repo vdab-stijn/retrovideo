@@ -9,22 +9,24 @@
 	<vdab:menu title='Hmmm ...' />
 	<div class="error">
 	<div>
-		<h2>Problem description</h2>
+		<div class="header2">Problem description</div>
 		<p>An error occurred while processing your request.</p>
 		<p>We apologise for the inconvenience. Please try again later.</p>
 	</div>
 	<div>
-		<h2>Error output</h2>
-		<c:if test='${not empty cause}'>
+		<div class="header2">Error output</div>
+		<c:choose>
+		<c:when test='${not empty cause}'>
 			<p>
-				${cause.toString}
+				Caused by: ${cause.getClass().getName()}
 			</p>
+		</c:when>
 		<c:otherwise>
 			<p>
 				The cause of this error is as of yet undetermined.
 			</p>
 		</c:otherwise>
-		</c:if>
+		</c:choose>
 		<c:if test='${not empty message}'>
 			<p>
 				${message}
@@ -33,13 +35,13 @@
 		<c:if test='${not empty trace}'>
 			<p>
 				<c:forEach var='element' items='${trace}'>
-				${element.toString}<br />
+				${element.getClassName()}<br />
 				</c:forEach>
 			</p>
 		</c:if>
 	</div>
 	<div>
-		<h2>What to do</h2>
+		<div class="header2">What to do</div>
 		<p>
 			Our developers have already been notified of the problem. If you
 			would like further information or submit a full error report,

@@ -3,6 +3,9 @@ package be.vdab.retrovideo.repositories;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,16 +24,18 @@ import be.vdab.retrovideo.entities.Movie;
 @RunWith(SpringRunner.class)
 @JdbcTest
 @AutoConfigureTestDatabase(replace = Replace.NONE)
-@Import(JdbcMovieRepository.class)
-public class JdbcMovieRepositoryTest
+@Import(MovieRepositoryJDBC.class)
+public class MovieRepositoryJDBCTest
 extends AbstractTransactionalJUnit4SpringContextTests {
 	
 	private static final String MOVIES = "films";
 	private static final String KNOWN_GENRE_NAME = "Avontuur";
 	
 	@Autowired
-	private JdbcMovieRepository repository;
+	private MovieRepositoryJDBC repository;
 	
+	private static final BigDecimal MOVIE_ZORRO_PRICE
+	= BigDecimal.valueOf(3.5);
 	private static final String SELECT_MOVIE_ZORRO_ID
 	= "SELECT id FROM films WHERE titel = 'Zorro'";
 	private final long getIdOfKnownMovie() {
@@ -75,12 +80,25 @@ extends AbstractTransactionalJUnit4SpringContextTests {
 	@Test
 	public final void findAllByGenreWorks() {
 		final long genreId = getIdOfKnownGenre();
-		final List<Movie> movies = repository.findAllByGenre(genreId);
+		final List<Movie> movies = repository.findAllByGenreId(genreId);
 		
 		// Movies are found
 		assertTrue(movies.size() > 0);
 		// Number of movies found is as expected
 		assertEquals(movies.size(), super.countRowsInTableWhere(
 				MOVIES, "genreid = " + genreId));
+	}
+	
+	@Test
+	public final void countTotal() {
+		final BigDecimal total = repository.countTotal(new ArrayList<Long>());
+		
+		assertTrue(total.compareTo(BigDecimal.ZERO) == 0);
+		
+		final List<Long> movieIds
+		= Arrays.asList(new Long[] { getIdOfKnownMovie() });
+		
+		assertTrue(MOVIE_ZORRO_PRICE.compareTo(
+				repository.countTotal(movieIds)) == 0);
 	}
 }

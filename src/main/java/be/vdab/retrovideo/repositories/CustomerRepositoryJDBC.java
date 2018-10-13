@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import be.vdab.retrovideo.entities.Customer;
 
 @Repository
-public class JdbcCustomerRepository implements CustomerRepository {
+public class CustomerRepositoryJDBC implements CustomerRepository {
 
 	private final JdbcTemplate template;
 	
@@ -22,7 +22,7 @@ public class JdbcCustomerRepository implements CustomerRepository {
 				resultSet.getString("postcode"),
 				resultSet.getString("gemeente"));
 	
-	public JdbcCustomerRepository(final JdbcTemplate template) {
+	public CustomerRepositoryJDBC(final JdbcTemplate template) {
 		this.template = template;
 	}
 	

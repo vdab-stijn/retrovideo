@@ -10,7 +10,8 @@ public interface MovieService {
 
 	public Optional<Movie> read(final long movieId);
 	public List<Movie> findAll();
-	public List<Movie> findAllByGenre(final long genreId);
+	public List<Movie> findAllByGenreId(final long genreId);
+	public List<Movie> findAllBySearchString(final String searchString);
 	
 	public BigDecimal countTotal(final List<Long> movieIds);
 }

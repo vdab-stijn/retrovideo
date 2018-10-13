@@ -2,6 +2,20 @@
 
 /*******************************************************************************
 **
+**		GENERAL SETTINGS: CONTAINERS LEFT
+**
+*******************************************************************************/
+
+#content {
+	padding-left: 1.2em;
+}
+
+#menu .nav, #menu .header1, #menu .genres, table.basket {
+	padding-left: 1.2em;
+}
+
+/*******************************************************************************
+**
 **		MENU SETTINGS: SITE NAVIGATION
 **
 *******************************************************************************/
@@ -9,17 +23,17 @@
 	background-color: #4488ee;
 }
 
-#menu, #menu .nav, #menu h1, #menu .genres {
+#menu, #menu .nav, #menu .header1, #menu .genres {
 	clear: both;
 }
 
-#menu .nav, #menu input, #menu img {
-	padding-left: 1.4em;
-	padding-top: 1.4em;
+#menu .nav, #menu .header1, #menu .genres {
+	padding-left: 1em;
 }
 
-#menu h1 {
-	padding-left: 1.4em;
+#menu .nav {
+	padding-top: 1.4em;
+	padding-bottom: 1.4em;
 }
 
 #menu .nav a, #menu input, #menu img {
@@ -44,12 +58,32 @@
 	border-color: #24DA37;
 }
 
+#menu .nav a.movieDB, #menu input.movieDB {	
+	padding: 0.4em;
+	margin-right: 0.3em;
+	
+	color: #000;
+	background-color: #6a7881;
+	border-radius: 25px;
+	border: 2px solid #6a7881;
+	
+	text-decoration: none;
+}
+
+#menu .search img {
+	display: block;
+	
+	padding: 7px 0;
+	margin: auto;
+	
+}
+
 /*******************************************************************************
 **
 **		MENU SETTINGS: GENRES
 **
 *******************************************************************************/
-ul.genres {
+div.genres ul {
 	margin: 0;
 	
 	list-style-type: none;
@@ -57,11 +91,11 @@ ul.genres {
 	overflow: hidden;
 }
 
-ul.genres li {
+div.genres ul li {
 	float: left;
 }
 
-ul.genres li a {
+div.genres ul li a, div.genres ul li span {
 	display: block;
 	padding: 14px 16px;
 	
@@ -71,11 +105,11 @@ ul.genres li a {
 	text-decoration: none;
 }
 
-ul.genres li a:hover {
+div.genres ul li a:hover {
 	background-color: #000;
 }
 
-ul.genres li a.current {
+div.genres ul li a.current, div.genres ul li span.current {
 	background-color: #000;
 }
 
@@ -105,3 +139,27 @@ div.movie div.title {
 div.movie div.poster {
 	
 }
+
+/*******************************************************************************
+**
+**		SPECIAL CONTAINERS: BASKET TABLE
+**
+*******************************************************************************/
+table.basket {
+	width: 30em;
+}
+
+table.basket th, table.basket td {
+	text-align: left;
+}
+
+table.basket tr {
+	padding-bottom: 1em;
+}
+
+table.basket th {
+	font-weight: bold;
+}
+
+
+

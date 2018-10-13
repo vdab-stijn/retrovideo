@@ -9,20 +9,24 @@
 <body>
 	<vdab:menu title='Movies in basket' currentPage='basket' />
 	
-	<c:url var='url' value='/movie' />
-	<form:form id='basketForm' action='${url}' method='get'>
-		<table>
+	<c:url var='url' value='/basket' />
+	<form:form id='basketForm' action='${url}' method='post'>
+		<table class="basket">
 			<tr>
 				<th>Movie</th>
 				<th>Price</th>
 				<th></th>
 			</tr>
-			<c:forEach var='movie' items='movies'>
-				
+			<c:forEach var='movie' items='${movies}'>
+				<tr>
+					<td>${movie.title}</td>
+					<td>${movie.price}</td>
+					<td></td>
+				</tr>
 			</c:forEach>
 			<tr>
 				<td>TOTAL:</td>
-				<td><c:out value='${total}' /></td>
+				<td><c:out value='${total}' /> &euro;</td>
 				<td>&nbsp;</td>
 			</tr>
 		</table>

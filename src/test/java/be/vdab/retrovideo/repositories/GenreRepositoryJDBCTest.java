@@ -21,14 +21,14 @@ import be.vdab.retrovideo.entities.Genre;
 @RunWith(SpringRunner.class)
 @JdbcTest
 @AutoConfigureTestDatabase(replace = Replace.NONE)
-@Import(JdbcGenreRepository.class)
-public class JdbcGenreRepositoryTest
+@Import(GenreRepositoryJDBC.class)
+public class GenreRepositoryJDBCTest
 extends AbstractTransactionalJUnit4SpringContextTests {
 
 	private static final String GENRES = "genres";
 	
 	@Autowired
-	private JdbcGenreRepository repository;
+	private GenreRepositoryJDBC repository;
 	
 	@Test
 	public void readKnownGenre() {

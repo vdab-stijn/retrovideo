@@ -4,13 +4,8 @@
 <%@ taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core' %>
 <%@ taglib prefix='spring' uri='http://www.springframework.org/tags' %>
 
-<c:if test='${not empty genres}'>
-	<ul class='genres'>
-	<c:forEach var='genre' items='${genres}'>
-		<spring:url var='url' value='/{id}'>
-			<spring:param name='id' value='${genre.id}' />
-		</spring:url>
-		<li><a href='${url}' title='${genre.name}'<c:if test='${not empty currentGenre and currentGenre == genre.id}'> class="current" disabled="true"</c:if>>${genre.name}</a></li>
-	</c:forEach>
-	</ul>
-</c:if>
+<!-- // BEGIN (MENU: GENRE LIST) ******************************************* -->
+<c:if test='${not empty genres}'><div class='genres'><ul><c:forEach var='genre' items='${genres}'><spring:url var='url' value='/{id}'><spring:param name='id' value='${genre.id}' /></spring:url>
+	<li><c:choose><c:when test='${empty currentGenre or currentGenre != genre.id}'><a href='${url}' title='${genre.name}'>${genre.name}</a></c:when><c:otherwise><span class='current'>${genre.name}</span></c:otherwise></c:choose></li></c:forEach>
+</ul></div></c:if>
+<!-- // END (MENU: GENRE LIST) ********************************************* -->

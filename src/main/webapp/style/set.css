@@ -15,13 +15,10 @@ body {
 **		HEADERS
 **
 *******************************************************************************/
-h1 {
-	padding-top: 0.4em;
-	padding-bottom: 0.4em;
-	
+.header1 {
 	font-size: 3em;
 }
-h2 {
+.header2 {
 	font-size: 2em;
 }
 

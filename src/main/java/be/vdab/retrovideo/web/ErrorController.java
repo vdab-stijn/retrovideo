@@ -24,6 +24,8 @@ public class ErrorController {
 	public final ModelAndView error(final WebRequest request) {
 		final Throwable throwable = errorAttributes.getError(request);
 		
+		if (throwable == null) return new ModelAndView(VIEW_ERROR);
+		
 		return new ModelAndView(VIEW_ERROR)
 				.addObject("cause", throwable.getCause())
 				.addObject("message", throwable.getMessage())

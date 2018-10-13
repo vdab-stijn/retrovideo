@@ -37,7 +37,7 @@ public class IndexController {
 		= new ModelAndView(VIEW_MOVIES_BY_GENRES)
 				.addObject("genres", genreService.findAll())
 				.addObject("currentGenre", id)
-				.addObject("movies", movieService.findAllByGenre(id));
+				.addObject("movies", movieService.findAllByGenreId(id));
 		
 		genreService.read(id).ifPresent(genre ->
 				modelAndView.addObject("genre", genre));
