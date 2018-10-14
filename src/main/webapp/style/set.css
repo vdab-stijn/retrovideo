@@ -27,19 +27,28 @@ body {
 **		SPECIAL CONTAINERS: ERROR
 **
 *******************************************************************************/
-div.error {
+.error {
 	padding: 1em;
 	margin: 1em;
 }
 
-div.error div {
+.error div {
 	margin-bottom: 1em;
 }
 
-div.error h2 {
+.error h2 {
 	margin-bottom: 0.2em;
 }
 
-div.error p {
+.error p {
 	margin-bottom: 0.4em;
+}
+
+/*******************************************************************************
+**
+**		SPECIAL CONTAINERS: FORMS ERRORS
+**
+*******************************************************************************/
+.formError {
+	color: red;
 }

@@ -7,7 +7,7 @@
 <html>
 	<vdab:htmlhead title='RetroVideo' />
 <body>
-	<vdab:menu title='RetroVideo reservatie-systeem' currentPage='' currentGenre='${currentGenre}' />
+	<vdab:menu title='Reservation system' currentPage='' currentGenre='${currentGenre}' />
 	
 <!-- *********************************************************************** -->
 <!-- BEGIN (CONTENT)                                                         -->

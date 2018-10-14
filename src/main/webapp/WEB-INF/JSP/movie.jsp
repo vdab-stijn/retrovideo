@@ -9,14 +9,15 @@
 <body>
 	<vdab:menu title='Movie data'/>
 	
+	<div id='content'>
 	<div class='movie'>
 		<div class='title'>${movie.title}</div>
 		<spring:url var='url' value='/basket/{id}'>
 			<spring:param name='id' value='${movie.id}' />
 		</spring:url>
-		<a href='${url}' title='Add ${movie.title} to basket'>
+		<c:if test='${movie.canBeReserved()}'><a href='${url}' title='Add ${movie.title} to basket'></c:if>
 		<img id='movieIMG' src='<c:out value='/posters/${movie.id}.jpg' />' />
-		</a>
+		<c:if test='${movie.canBeReserved()}'></a></c:if>
 		<div class='row'>
 			<span class='rowLabel'>Price:</span>
 			<span class='rowData'>${movie.price} &euro;</span>
@@ -39,7 +40,7 @@
 		</div>
 		<form id='movieBasketForm' action='${url}' method='get'>
 			<input id='movieId' type='hidden' value='${movie.id}' />
-			<input id='basketSubmit' type='submit' value='Add to basket' />
+			<input id='basketSubmit' type='submit' value='Add to basket'<c:if test='${!movie.canBeReserved()}'> disabled='true'</c:if>>
 		</form>
 		<script>
 			document.getElementById('movieIMG')
@@ -53,6 +54,7 @@
 				document.getElementById('basketSubmit').disabled = true;
 			});
 		</script>
+	</div>
 	</div>
 </body>
 </html>

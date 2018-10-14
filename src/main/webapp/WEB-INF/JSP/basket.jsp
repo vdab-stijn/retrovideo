@@ -9,9 +9,9 @@
 <body>
 	<vdab:menu title='Movies in basket' currentPage='basket' />
 	
-	<div class='content'>
+	<div id='content'>
 	<c:url var='url' value='/basket' />
-	<form:form id='basketForm' modelAttribute='movieBasketform' action='${url}' method='post'>
+	<form:form id='basketForm' modelAttribute='movieBasketForm' action='${url}' method='post'>
 		<table class='basket'>
 			<tr class='basketHeader'>
 				<th class='movieTitle'>MOVIE</th>

@@ -9,8 +9,9 @@
 <body>
 	<vdab:menu title='Movie database' currentPage='movies' currentGenre='${currentGenre}' />
 	
+	<div id='content'>
 	<c:if test='${not empty movies}'>
-	<div>
+	<div class='movies'>
 		<c:if test='${not empty genre}'>
 			<h1>${genre.name.toUpperCase()}</h1>
 		</c:if>
@@ -26,5 +27,6 @@
 		</c:forEach>
 	</div>
 	</c:if>
+	</div>
 </body>
 </html>

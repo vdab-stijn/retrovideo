@@ -22,12 +22,14 @@ public class DefaultMovieBasket implements Serializable, MovieBasket {
 
 	@Override
 	public void addMovieId(final long movieId) {
-		movieIds.add(movieId);
+		if (!movieIds.contains(movieId))
+			movieIds.add(movieId);
 	}
 	
 	@Override
 	public void deleteMovieId(final long movieId) {
-		movieIds.remove(movieId);
+		if (movieIds.contains(movieId))
+			movieIds.remove(movieId);
 	}
 
 	@Override

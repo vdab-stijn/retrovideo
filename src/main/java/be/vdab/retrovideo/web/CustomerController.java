@@ -2,6 +2,8 @@ package be.vdab.retrovideo.web;
 
 import javax.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +18,9 @@ import be.vdab.retrovideo.web.forms.CustomerSearchForm;
 @Controller
 @RequestMapping("/customers")
 public class CustomerController {
+	
+	private static final Logger LOGGER
+	= LoggerFactory.getLogger(CustomerController.class);
 
 	private final GenreService genreService;
 	private final CustomerService customerService;
@@ -40,8 +45,15 @@ public class CustomerController {
 	public final ModelAndView searchCustomers(
 			@Valid final CustomerSearchForm form,
 			final BindingResult bindingResult) {
-		if (bindingResult.hasErrors())
+		if (bindingResult.hasErrors() ||
+			form.getSearchString().replaceAll("\\s", "").isEmpty()) {
+			LOGGER.error("Validation error in customers.jsp (searchString: " +
+					form.getSearchString() + ")");
+
+			bindingResult.reject("noFamilyName");
+			
 			return new ModelAndView(VIEW_SEARCH_RESULTS);
+		}
 		
 		return new ModelAndView(VIEW_SEARCH_RESULTS)
 				.addObject("genres", genreService.findAll())

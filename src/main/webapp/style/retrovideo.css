@@ -2,38 +2,42 @@
 
 /*******************************************************************************
 **
-**		GENERAL SETTINGS: CONTAINERS LEFT
+**		MAIN CONTAINERS
 **
 *******************************************************************************/
 
-#content {
-	padding-left: 1.2em;
-}
-
-#menu .nav, #menu .header1, #menu .genres, table.basket {
-	padding-left: 1.2em;
+#menu, #content {
+	clear: both;
 }
 
 /*******************************************************************************
 **
-**		MENU SETTINGS: SITE NAVIGATION
+**		CONTENT ALIGNMENT
+**
+*******************************************************************************/
+#menu .nav, #menu .header1, #content {
+	padding-left: 0.8em;
+}
+
+#menu .nav, #menu .header1, #menu .genres, #content {
+	padding-top: 0.8em;
+}
+
+/*******************************************************************************
+**
+**		MENU: SITE NAVIGATION
 **
 *******************************************************************************/
 #menu {
 	background-color: #4488ee;
 }
 
-#menu, #menu .nav, #menu .header1, #menu .genres {
+#menu .nav, #menu .header1, #menu .genres {
 	clear: both;
 }
 
-#menu .nav, #menu .header1, #menu .genres {
-	padding-left: 1em;
-}
-
 #menu .nav {
-	padding-top: 1.4em;
-	padding-bottom: 1.4em;
+	padding-bottom: 1.8em;
 }
 
 #menu .nav a, #menu input, #menu img {
@@ -80,7 +84,16 @@
 
 /*******************************************************************************
 **
-**		MENU SETTINGS: GENRES
+**		MENU: PAGE TITLE
+**
+*******************************************************************************/
+#menu .header1 {
+	padding-bottom: 0.6em;
+}
+
+/*******************************************************************************
+**
+**		MENU: GENRES
 **
 *******************************************************************************/
 div.genres ul {
@@ -102,6 +115,7 @@ div.genres ul li a, div.genres ul li span {
 	color: white;
 	font-weight: bold;
 	text-align: center;
+	text-vertical-align: bottom;
 	text-decoration: none;
 }
 

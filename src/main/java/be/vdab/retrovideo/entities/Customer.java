@@ -1,5 +1,7 @@
 package be.vdab.retrovideo.entities;
 
+import org.apache.commons.text.WordUtils;
+
 public class Customer extends RetroVideoEntity {
 
 	private String firstName;
@@ -64,6 +66,6 @@ public class Customer extends RetroVideoEntity {
 	}
 	
 	public final String getName() {
-		return getFirstName() + " " + getLastName();
+		return WordUtils.capitalize(getFirstName() + " " + getLastName());
 	}
 }

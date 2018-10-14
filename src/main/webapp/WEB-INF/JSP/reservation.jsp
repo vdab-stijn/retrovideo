@@ -8,8 +8,11 @@
 <body>
 <vdab:menu title='Confirm the reservation' />
 <c:if test='${not empty customer}'>
-<div class='content'>
-	<div class='header1'>Confirm the reservation</div>
+<div id='content'>
+	<div class='header1'>Reservation details</div>
+	<div>
+		<p>Reservation for <em>${customer.getName()}</em></p>
+	</div>
 	<c:forEach var='movie' items='${movies}'>
 	
 	</c:forEach>

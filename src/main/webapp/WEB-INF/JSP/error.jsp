@@ -7,14 +7,14 @@
 	<vdab:htmlhead title='RetroVideo - ERROR' />
 <body>
 	<vdab:menu title='Hmmm ...' />
-	<div class="error">
+	<div id='content' class='error'>
 	<div>
-		<div class="header2">Problem description</div>
+		<div class='header2'>Problem description</div>
 		<p>An error occurred while processing your request.</p>
 		<p>We apologise for the inconvenience. Please try again later.</p>
 	</div>
 	<div>
-		<div class="header2">Error output</div>
+		<div class='header2'>Error output</div>
 		<c:choose>
 		<c:when test='${not empty cause}'>
 			<p>
@@ -41,7 +41,7 @@
 		</c:if>
 	</div>
 	<div>
-		<div class="header2">What to do</div>
+		<div class='header2'>What to do</div>
 		<p>
 			Our developers have already been notified of the problem. If you
 			would like further information or submit a full error report,
@@ -49,7 +49,7 @@
 		</p>
 		<p>
 			Administrator e-mail:
-			<a href='<c:url value="mailto:sverholen@gmail.com" />'>sverholen@gmail.com</a>
+			<a href='<c:url value='mailto:sverholen@gmail.com' />'>sverholen@gmail.com</a>
 		</p>
 	</div>
 	</div>
