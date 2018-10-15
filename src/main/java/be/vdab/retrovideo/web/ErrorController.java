@@ -8,25 +8,34 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import be.vdab.retrovideo.services.GenreService;
+
 @Controller
 @RequestMapping("/error")
 public class ErrorController {
 	
+	private final GenreService genreService;
 	private final ErrorAttributes errorAttributes;
 	
 	@Autowired
-	public ErrorController(final ErrorAttributes errorAttributes) {
+	public ErrorController(
+			final GenreService genreService,
+			final ErrorAttributes errorAttributes) {
+		this.genreService = genreService;
 		this.errorAttributes = errorAttributes;
 	}
 
 	private static final String VIEW_ERROR = "error";
 	@GetMapping
 	public final ModelAndView error(final WebRequest request) {
+		final ModelAndView modelAndView = new ModelAndView(VIEW_ERROR);
 		final Throwable throwable = errorAttributes.getError(request);
 		
-		if (throwable == null) return new ModelAndView(VIEW_ERROR);
+		modelAndView.addObject("genres", genreService.findAll());
 		
-		return new ModelAndView(VIEW_ERROR)
+		if (throwable == null) return modelAndView;
+		
+		return modelAndView
 				.addObject("cause", throwable.getCause())
 				.addObject("message", throwable.getMessage())
 				.addObject("trace", throwable.getStackTrace());

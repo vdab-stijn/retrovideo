@@ -8,5 +8,6 @@ import be.vdab.retrovideo.entities.Customer;
 public interface CustomerRepository {
 
 	Optional<Customer> read(final long customerId);
+	List<Customer> findAll();
 	List<Customer> findAllBySearchString(final String searchString);
 }

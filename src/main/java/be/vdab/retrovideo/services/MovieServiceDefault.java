@@ -45,4 +45,10 @@ public class MovieServiceDefault implements MovieService {
 	public List<Movie> findAllBySearchString(final String searchString) {
 		return movieRepository.findAllBySearchString(searchString);
 	}
+	
+	@Override
+	@Transactional(readOnly = false, isolation = Isolation.READ_COMMITTED)
+	public List<Long> reserveMovies(final List<Long> movieIds) {
+		return movieRepository.reserveMovies(movieIds);
+	}
 }

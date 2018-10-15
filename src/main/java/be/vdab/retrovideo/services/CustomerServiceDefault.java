@@ -24,6 +24,10 @@ public class CustomerServiceDefault implements CustomerService {
 		return customerRepository.read(customerId);
 	}
 	
+	public List<Customer> findAll() {
+		return customerRepository.findAll();
+	}
+	
 	public List<Customer> findAllBySearchString(final String searchString) {
 		return customerRepository.findAllBySearchString(searchString);
 	}

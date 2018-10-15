@@ -1,12 +1,16 @@
 package be.vdab.retrovideo.repositories;
 
 import java.math.BigDecimal;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataAccessException;
+import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -126,5 +130,51 @@ public class MovieRepositoryJDBC implements MovieRepository {
 		
 		return template.queryForObject(
 					query, BigDecimal.class);
+	}
+	
+	private static final String QUERY_UPDATE_STOCK_RESERVED
+	= "UPDATE films SET " +
+			"gereserveerd = gereserveerd + 1 " +
+			"WHERE id = ? AND voorraad > gereserveerd";
+	@Override
+	public List<Long> reserveMovies(final List<Long> movieIds) {
+		int[] affected = null;
+		try {
+			affected = template.batchUpdate(
+				QUERY_UPDATE_STOCK_RESERVED,
+				new BatchPreparedStatementSetter() {
+
+					@Override
+					public void setValues(PreparedStatement ps, int i)
+					throws SQLException {
+						ps.setLong(1, movieIds.get(i));
+					}
+
+					@Override
+					public int getBatchSize() {
+						return movieIds.size();
+					}
+			});
+		}
+		catch (final DataAccessException dae) {
+			LOGGER.error("Error while updating movie stock", dae);
+		}
+		
+		if (affected == null ||
+			movieIds.size() != affected.length) {
+			LOGGER.error("ERROR: input list size != update list size");
+			
+			return movieIds;
+		}
+		
+		final List<Long> failed = new ArrayList<>();
+		for (int i = 0; i < movieIds.size(); i++) {
+			LOGGER.debug(i + " (movie: " + movieIds.get(i) + ") - AFFECTED " + affected[i]);
+			
+			if (affected[i] != 1)
+				failed.add(movieIds.get(i));
+		}
+		
+		return failed;
 	}
 }

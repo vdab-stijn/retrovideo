@@ -15,4 +15,6 @@ public interface MovieRepository {
 	List<Movie> findAllBySearchString(final String searchString);
 	
 	BigDecimal countTotal(final List<Long> movieIds);
+	
+	List<Long> reserveMovies(final List<Long> movieIds);
 }

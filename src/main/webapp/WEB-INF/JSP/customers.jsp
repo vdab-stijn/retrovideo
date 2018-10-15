@@ -23,19 +23,20 @@
 		<input id='formSubmit' type='submit' value='Search' />
 		</div>
 	</form:form>
-	<c:if test='${not empty customers}'>
-	<table class='customers'>
-		<tr>
+	<c:choose>
+	<c:when test='${not empty customers}'>
+	<table class='basket customers'>
+		<tr class='basketHeader'>
 			<th>Name</th>
 			<th>Street - number</th>
 			<th>Postal code</th>
 			<th>Municipality</th>
 		</tr>
 	<c:forEach var='customer' items='${customers}'>
-	<spring:url var='url' value='/reservation/{id}'>
+	<spring:url var='url' value='/basket/reservation/{id}'>
 		<spring:param name='id' value='${customer.id}' />
 	</spring:url>
-	<tr>
+	<tr class='basketData'>
 		<td><a href='${url}'>${customer.getName()}</a></td>
 		<td>${customer.streetNumber}</td>
 		<td>${customer.postalCode}</td>
@@ -43,7 +44,19 @@
 	</tr>
 	</c:forEach>
 	</table>
+	</c:when>
+	<c:otherwise>
+	<c:if test='${not empty searchString}'>
+		<c:url var='url' value='/customers/list' />
+		<p>No customers found for search string '${searchString}'</p>
+		<p>
+			Please enter a different search string or
+			<a href='${url}' title='Select customers from a list'>select</a>
+			the customer from the listing.
+		</p>
 	</c:if>
+	</c:otherwise>
+	</c:choose>
 </div>
 </body>
 </html>

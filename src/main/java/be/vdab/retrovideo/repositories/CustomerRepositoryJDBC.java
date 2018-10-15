@@ -32,10 +32,23 @@ public class CustomerRepositoryJDBC implements CustomerRepository {
 	 */
 	private static final String QUERY_SELECT_BY_ID
 	= "SELECT id, voornaam, familienaam, straatNummer, postcode, gemeente " +
-			"FROM klanten WHERE id = ?";
+			"FROM klanten WHERE id = ? ";
 	public Optional<Customer> read(final long customerId) {
 		return Optional.of(template.queryForObject(
 				QUERY_SELECT_BY_ID, customerMapper, customerId));
+	}
+	
+	/*
+	 * 
+	 * READ ALL CUSTOMERS
+	 */
+	private static final String QUERY_SELECT_ALL
+	= "SELECT id, voornaam, familienaam, straatNummer, postcode, gemeente " +
+			"FROM klanten " +
+			"ORDER BY familienaam, voornaam";
+	@Override
+	public List<Customer> findAll() {
+		return template.query(QUERY_SELECT_ALL, customerMapper);
 	}
 	
 	/*
@@ -44,7 +57,8 @@ public class CustomerRepositoryJDBC implements CustomerRepository {
 	 */
 	private static final String QUERY_SELECT_BY_SEARCH_STRING
 	= "SELECT id, voornaam, familienaam, straatNummer, postcode, gemeente " +
-			"FROM klanten WHERE familienaam LIKE ?";
+			"FROM klanten WHERE familienaam LIKE ? " +
+			"ORDER BY familienaam, voornaam";
 	@Override
 	public List<Customer> findAllBySearchString(String searchString) {
 		return template.query(
@@ -52,5 +66,4 @@ public class CustomerRepositoryJDBC implements CustomerRepository {
 				new String[] { "%" + searchString + "%" },
 				customerMapper);
 	}
-
 }

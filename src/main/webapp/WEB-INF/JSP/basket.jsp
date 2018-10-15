@@ -1,6 +1,7 @@
 <%@ page language='java' contentType='text/html; charset=UTF-8' pageEncoding='UTF-8' session='false' %>
 <%@ taglib prefix='vdab' uri='http://vdab.be/tags' %>
 <%@ taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core' %>
+<%@ taglib prefix='spring' uri='http://www.springframework.org/tags' %>
 <%@ taglib prefix='form' uri='http://www.springframework.org/tags/form' %>
 
 <!DOCTYPE html>
@@ -46,6 +47,19 @@
 				<td class='movieTitle'>TOTAL:</td>
 				<td class='moviePrice' colspan='2'><c:out value='${total}' /> &euro;</td>
 			</tr>
+			<c:if test='${not empty customer}'>
+			<c:url var='url' value='/customers/list' />
+			<spring:url var='confirm' value='basket/reservation/{id}'>
+				<spring:param name='id' value='${customer.id}' />
+			</spring:url>
+			<tr>
+				<td colspan='3'>
+					<span>Currently reserved for ${customer.getName()}</span>
+					<span>(<a href='${url}'>change customer</a> or</span>
+					<span><a href='${confirm}'>confirm reservation</a>)</span>
+				</td>
+			</tr>
+			</c:if>
 		</table>
 	</form:form>
 	<script>

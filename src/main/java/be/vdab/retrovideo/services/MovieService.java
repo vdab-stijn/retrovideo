@@ -14,4 +14,6 @@ public interface MovieService {
 	public List<Movie> findAllBySearchString(final String searchString);
 	
 	public BigDecimal countTotal(final List<Long> movieIds);
+	
+	public List<Long> reserveMovies(final List<Long> movieIds);
 }

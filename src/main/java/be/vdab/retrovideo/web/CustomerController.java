@@ -40,6 +40,15 @@ public class CustomerController {
 				.addObject(new CustomerSearchForm(""));
 	}
 	
+	private static final String VIEW_CUSTOMERS_LIST = "customers";
+	@GetMapping("/list")
+	public final ModelAndView viewListing() {
+		return new ModelAndView(VIEW_CUSTOMERS_LIST)
+				.addObject("genres", genreService.findAll())
+				.addObject(new CustomerSearchForm(""))
+				.addObject("customers", customerService.findAll());
+	}
+	
 	private static final String VIEW_SEARCH_RESULTS = "customers";
 	@PostMapping
 	public final ModelAndView searchCustomers(
@@ -52,11 +61,13 @@ public class CustomerController {
 
 			bindingResult.reject("noFamilyName");
 			
-			return new ModelAndView(VIEW_SEARCH_RESULTS);
+			return new ModelAndView(VIEW_SEARCH_RESULTS)
+					.addObject("genres", genreService.findAll());
 		}
 		
 		return new ModelAndView(VIEW_SEARCH_RESULTS)
 				.addObject("genres", genreService.findAll())
+				.addObject("searchString", form.getSearchString())
 				.addObject("customers",
 						customerService.findAllBySearchString(
 								form.getSearchString()));
